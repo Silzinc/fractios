@@ -9,7 +9,7 @@ impl<T: RatioFracType> RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType + polyx::traits::FloatLike> RatioFrac<T>
+impl<T: RatioFracType> RatioFrac<T>
 {
 	#[inline]
 	pub fn reduce(&mut self)
