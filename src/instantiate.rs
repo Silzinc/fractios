@@ -1,6 +1,6 @@
 use crate::{traits::RatioFracType, RatioFrac};
 use num_traits::{One, Zero};
-use polyx::Polynomial;
+use polyx::{polynomial, Polynomial};
 use std::{convert::From, default::Default};
 
 #[inline]
@@ -40,6 +40,16 @@ impl<T: RatioFracType> From<Polynomial<T>> for RatioFrac<T>
 	{
 		RatioFrac { numerator,
 		            denominator: Polynomial::one() }
+	}
+}
+
+impl<T: RatioFracType> From<T> for RatioFrac<T>
+{
+	#[inline]
+	fn from(numerator: T) -> Self
+	{
+		RatioFrac { numerator:   polynomial![numerator],
+		            denominator: Polynomial::one(), }
 	}
 }
 
