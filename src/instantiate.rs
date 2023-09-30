@@ -89,10 +89,11 @@ impl<T: RatioFracType> Default for RatioFrac<T>
 impl<T: RatioFracType> RatioFrac<T>
 {
 	#[inline]
-	pub fn new() -> Self
+	pub fn new(numerator: Polynomial<T>, denominator: Polynomial<T>) -> Self
 	{
-		RatioFrac { numerator:   Polynomial::zero(),
-		            denominator: Polynomial::one(), }
+		check(&denominator);
+		RatioFrac { numerator,
+		            denominator }
 	}
 
 	#[inline]
