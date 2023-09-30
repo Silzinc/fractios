@@ -126,9 +126,5 @@ impl<T: RatioFracType> Inv for RatioFrac<T>
 impl<T: RatioFracType> RatioFrac<T>
 {
 	#[inline]
-	pub fn inv_inplace(&mut self)
-	{
-		self.numerator = std::mem::take(&mut self.denominator);
-		self.denominator = std::mem::take(&mut self.numerator);
-	}
+	pub fn inv_inplace(&mut self) { std::mem::swap(&mut self.denominator, &mut self.numerator); }
 }
