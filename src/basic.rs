@@ -14,6 +14,9 @@ impl<T: RatioFracType> RatioFrac<T>
 	#[inline]
 	pub fn reduce(&mut self)
 	{
+		if self.numerator.is_empty() {
+			return self.denominator = polyx::Polynomial::from(vec![T::one()]);
+		}
 		let (reduced_numerator, reduced_denominator) =
 			polyx::Polynomial::cofactor_float(&mut self.numerator, &mut self.denominator);
 		// println!("{:?}\n{:?}\n", reduced_numerator, reduced_denominator);
