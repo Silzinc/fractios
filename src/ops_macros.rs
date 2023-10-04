@@ -3,7 +3,7 @@
 #[macro_export(local_inner_macros)]
 macro_rules! impl_op_ratiofrac {
 	($op:ident, $method:ident $(,$requirements:ident)*) => {
-		impl<T> $op<RatioFrac<T>> for &RatioFrac<T> where T: RatioFracType
+		impl<T> $op<RatioFrac<T>> for &RatioFrac<T> where T: PolyxNum
 		{
 			type Output = RatioFrac<T>;
 
@@ -11,7 +11,7 @@ macro_rules! impl_op_ratiofrac {
 			fn $method(self, other: RatioFrac<T>) -> RatioFrac<T> { self.$method(&other) }
 		}
 
-		impl<T> $op<&RatioFrac<T>> for RatioFrac<T> where T: RatioFracType
+		impl<T> $op<&RatioFrac<T>> for RatioFrac<T> where T: PolyxNum
 		{
 			type Output = RatioFrac<T>;
 
@@ -19,7 +19,7 @@ macro_rules! impl_op_ratiofrac {
 			fn $method(self, other: &RatioFrac<T>) -> RatioFrac<T> { (&self).$method(other) }
 		}
 
-		impl<T> $op<RatioFrac<T>> for RatioFrac<T> where T: RatioFracType
+		impl<T> $op<RatioFrac<T>> for RatioFrac<T> where T: PolyxNum
 		{
 			type Output = RatioFrac<T>;
 
@@ -35,7 +35,7 @@ macro_rules! impl_op_ratiofrac {
 #[macro_export(local_inner_macros)]
 macro_rules! impl_op_some_primitive_ratiofrac {
 	($op:ident, $method:ident, $t:ty $(,$requirements:ident)*) => {
-		impl<T> $op<RatioFrac<T>> for $t where T: RatioFracType + From<$t>
+		impl<T> $op<RatioFrac<T>> for $t where T: PolyxNum + From<$t>
 		{
 			type Output = RatioFrac<T>;
 
@@ -45,7 +45,7 @@ macro_rules! impl_op_some_primitive_ratiofrac {
 				other.$method(RatioFrac::from(std::vec![self.into()]))
 			}
 		}
-		impl<T> $op<&RatioFrac<T>> for $t where T: RatioFracType + From<$t>
+		impl<T> $op<&RatioFrac<T>> for $t where T: PolyxNum + From<$t>
 		{
 			type Output = RatioFrac<T>;
 
@@ -55,7 +55,7 @@ macro_rules! impl_op_some_primitive_ratiofrac {
 				other.$method(RatioFrac::from(std::vec![self.into()]))
 			}
 		}
-		impl<T> $op<$t> for RatioFrac<T> where T: RatioFracType + From<$t>
+		impl<T> $op<$t> for RatioFrac<T> where T: PolyxNum + From<$t>
 		{
 			type Output = RatioFrac<T>;
 
@@ -65,7 +65,7 @@ macro_rules! impl_op_some_primitive_ratiofrac {
 				self.$method(RatioFrac::from(std::vec![other.into()]))
 			}
 		}
-		impl<T> $op<$t> for &RatioFrac<T> where T: RatioFracType + From<$t>
+		impl<T> $op<$t> for &RatioFrac<T> where T: PolyxNum + From<$t>
 		{
 			type Output = RatioFrac<T>;
 
@@ -93,13 +93,13 @@ macro_rules! impl_op_all_primitive_ratiofrac {
 macro_rules! impl_assign_op_ratiofrac {
 	($op:ident, $assign_op:ident, $method:ident, $assign_method: ident $(,$requirements:ident)*) => {
 		impl<T> $assign_op<RatioFrac<T>> for RatioFrac<T>
-		where T: RatioFracType
+		where T: PolyxNum
 		{
 			#[inline]
 			fn $assign_method(&mut self, other: RatioFrac<T>) { *self = std::mem::take(self).$method(&other) }
 		}
 		impl<T> $assign_op<&RatioFrac<T>> for RatioFrac<T>
-		where T: RatioFracType
+		where T: PolyxNum
 		{
 			#[inline]
 			fn $assign_method(&mut self, other: &RatioFrac<T>) { *self = std::mem::take(self).$method(other) }
@@ -107,7 +107,7 @@ macro_rules! impl_assign_op_ratiofrac {
 		duplicate::duplicate! {
 			[primitive_type; [f64]; [f32]; [i8]; [i16]; [i32]; [i64]; [isize]; [i128]]
 			impl<T> $assign_op<primitive_type> for RatioFrac<T>
-			where T: RatioFracType + From<primitive_type>
+			where T: PolyxNum + From<primitive_type>
 			{
 				#[inline]
 				fn $assign_method(&mut self, other: primitive_type) { *self = std::mem::take(self).$method(RatioFrac::from(std::vec![other.into()])) }

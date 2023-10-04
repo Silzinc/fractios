@@ -1,14 +1,9 @@
+use crate::{instantiate::check, ops_macros::impl_op_all, traits::SignedRatioFracType, RatioFrac};
 use num_traits::Inv;
-
-use crate::{
-	instantiate::check,
-	ops_macros::impl_op_all,
-	traits::{RatioFracType, SignedRatioFracType},
-	RatioFrac,
-};
+use polyx::traits::PolyxNum;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
-impl<T: RatioFracType> Add for &RatioFrac<T>
+impl<T: PolyxNum> Add for &RatioFrac<T>
 {
 	type Output = RatioFrac<T>;
 
@@ -51,7 +46,7 @@ impl<T: SignedRatioFracType> Neg for RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType> Sub for &RatioFrac<T>
+impl<T: PolyxNum> Sub for &RatioFrac<T>
 {
 	type Output = RatioFrac<T>;
 
@@ -70,7 +65,7 @@ impl<T: RatioFracType> Sub for &RatioFrac<T>
 
 impl_op_all!(Sub, SubAssign, sub, sub_assign);
 
-impl<T: RatioFracType> Mul for &RatioFrac<T>
+impl<T: PolyxNum> Mul for &RatioFrac<T>
 {
 	type Output = RatioFrac<T>;
 
@@ -84,7 +79,7 @@ impl<T: RatioFracType> Mul for &RatioFrac<T>
 
 impl_op_all!(Mul, MulAssign, mul, mul_assign);
 
-impl<T: RatioFracType> Div for &RatioFrac<T>
+impl<T: PolyxNum> Div for &RatioFrac<T>
 {
 	type Output = RatioFrac<T>;
 
@@ -99,7 +94,7 @@ impl<T: RatioFracType> Div for &RatioFrac<T>
 
 impl_op_all!(Div, DivAssign, div, div_assign);
 
-impl<T: RatioFracType> Inv for &RatioFrac<T>
+impl<T: PolyxNum> Inv for &RatioFrac<T>
 {
 	type Output = RatioFrac<T>;
 
@@ -111,7 +106,7 @@ impl<T: RatioFracType> Inv for &RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType> Inv for RatioFrac<T>
+impl<T: PolyxNum> Inv for RatioFrac<T>
 {
 	type Output = RatioFrac<T>;
 
@@ -123,7 +118,7 @@ impl<T: RatioFracType> Inv for RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType> RatioFrac<T>
+impl<T: PolyxNum> RatioFrac<T>
 {
 	#[inline]
 	pub fn inv_inplace(&mut self) { std::mem::swap(&mut self.denominator, &mut self.numerator); }

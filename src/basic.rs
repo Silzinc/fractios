@@ -1,6 +1,7 @@
-use crate::{traits::RatioFracType, RatioFrac};
+use crate::RatioFrac;
+use polyx::traits::{FloatLike, PolyxNum};
 
-impl<T: RatioFracType> RatioFrac<T>
+impl<T: PolyxNum> RatioFrac<T>
 {
 	#[inline]
 	pub fn eval(&self, x: T) -> T
@@ -9,7 +10,7 @@ impl<T: RatioFracType> RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType> RatioFrac<T>
+impl<T: FloatLike> RatioFrac<T>
 {
 	#[inline]
 	pub fn reduce(&mut self)

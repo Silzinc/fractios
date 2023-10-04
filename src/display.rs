@@ -1,8 +1,9 @@
-use crate::{traits::RatioFracType, RatioFrac};
+use crate::RatioFrac;
 use num::complex::Complex;
 use num_traits::One;
+use polyx::traits::Primitive;
 
-impl<T: RatioFracType> RatioFrac<T>
+impl<T: Primitive> RatioFrac<T>
 {
 	pub fn to_latex_string(&self) -> String
 	{
@@ -20,7 +21,7 @@ impl<T: RatioFracType> RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType> RatioFrac<Complex<T>>
+impl<T: Primitive> RatioFrac<Complex<T>>
 {
 	pub fn to_latex_string_complex(&self) -> String
 	{

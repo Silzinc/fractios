@@ -1,10 +1,10 @@
-use crate::{traits::RatioFracType, RatioFrac};
+use crate::RatioFrac;
 use num_traits::{One, Zero};
-use polyx::{polynomial, Polynomial};
+use polyx::{polynomial, traits::PolyxNum, Polynomial};
 use std::{convert::From, default::Default};
 
 #[inline]
-pub(crate) fn check<T: RatioFracType>(denominator: &Polynomial<T>)
+pub(crate) fn check<T: PolyxNum>(denominator: &Polynomial<T>)
 {
 	if denominator.is_zero() {
 		panic!("Cannot use zero as a denominator for RatioFrac")
@@ -22,7 +22,7 @@ macro_rules! ratiofrac {
   })
 }
 
-impl<T: RatioFracType> From<(Polynomial<T>, Polynomial<T>)> for RatioFrac<T>
+impl<T: PolyxNum> From<(Polynomial<T>, Polynomial<T>)> for RatioFrac<T>
 {
 	#[inline]
 	fn from((numerator, denominator): (Polynomial<T>, Polynomial<T>)) -> Self
@@ -33,7 +33,7 @@ impl<T: RatioFracType> From<(Polynomial<T>, Polynomial<T>)> for RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType> From<Polynomial<T>> for RatioFrac<T>
+impl<T: PolyxNum> From<Polynomial<T>> for RatioFrac<T>
 {
 	#[inline]
 	fn from(numerator: Polynomial<T>) -> Self
@@ -43,7 +43,7 @@ impl<T: RatioFracType> From<Polynomial<T>> for RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType> From<T> for RatioFrac<T>
+impl<T: PolyxNum> From<T> for RatioFrac<T>
 {
 	#[inline]
 	fn from(numerator: T) -> Self
@@ -53,7 +53,7 @@ impl<T: RatioFracType> From<T> for RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType> Zero for RatioFrac<T>
+impl<T: PolyxNum> Zero for RatioFrac<T>
 {
 	#[inline]
 	fn zero() -> Self
@@ -66,7 +66,7 @@ impl<T: RatioFracType> Zero for RatioFrac<T>
 	fn is_zero(&self) -> bool { self.numerator.is_zero() }
 }
 
-impl<T: RatioFracType> One for RatioFrac<T>
+impl<T: PolyxNum> One for RatioFrac<T>
 {
 	#[inline]
 	fn one() -> Self
@@ -76,7 +76,7 @@ impl<T: RatioFracType> One for RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType> Default for RatioFrac<T>
+impl<T: PolyxNum> Default for RatioFrac<T>
 {
 	#[inline]
 	fn default() -> Self
@@ -86,7 +86,7 @@ impl<T: RatioFracType> Default for RatioFrac<T>
 	}
 }
 
-impl<T: RatioFracType> RatioFrac<T>
+impl<T: PolyxNum> RatioFrac<T>
 {
 	#[inline]
 	pub fn new(numerator: Polynomial<T>, denominator: Polynomial<T>) -> Self
@@ -100,7 +100,7 @@ impl<T: RatioFracType> RatioFrac<T>
 	pub fn is_empty(&self) -> bool { self.numerator.is_empty() }
 }
 
-impl<T: RatioFracType> From<Vec<T>> for RatioFrac<T>
+impl<T: PolyxNum> From<Vec<T>> for RatioFrac<T>
 {
 	#[inline]
 	fn from(values: Vec<T>) -> Self
