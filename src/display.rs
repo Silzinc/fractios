@@ -23,7 +23,7 @@ impl<T: Primitive> RatioFrac<T>
 
 impl<T: Primitive> RatioFrac<Complex<T>>
 {
-	pub fn to_latex(&self) -> String
+	pub fn to_latex_complex(&self) -> String
 	{
 		if self.numerator.is_empty() {
 			return "0".to_string();

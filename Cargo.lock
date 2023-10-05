@@ -113,7 +113,7 @@ dependencies = [
 [[package]]
 name = "polyx"
 version = "0.1.0"
-source = "git+https://github.com/Silzinc/polyx#428e3284780f4c6e0f6c5d5025c37e43c8edfe39"
+source = "git+https://github.com/Silzinc/polyx#f0434ec03f1cf28319d8b59d22c9b2c84d9269fc"
 dependencies = [
  "duplicate",
  "num",
