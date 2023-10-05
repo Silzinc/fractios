@@ -5,36 +5,36 @@ use polyx::traits::Primitive;
 
 impl<T: Primitive> RatioFrac<T>
 {
-	pub fn to_latex_string(&self) -> String
+	pub fn to_latex(&self) -> String
 	{
 		if self.numerator.is_empty() {
 			return "0".to_string();
 		}
 		if self.denominator.is_one() {
-			return self.numerator.to_latex_string();
+			return self.numerator.to_latex();
 		}
 		return format!(
 		               "\\frac{{{}}}{{{}}}",
-		               self.numerator.to_latex_string(),
-		               self.denominator.to_latex_string()
+		               self.numerator.to_latex(),
+		               self.denominator.to_latex()
 		);
 	}
 }
 
 impl<T: Primitive> RatioFrac<Complex<T>>
 {
-	pub fn to_latex_string_complex(&self) -> String
+	pub fn to_latex(&self) -> String
 	{
 		if self.numerator.is_empty() {
 			return "0".to_string();
 		}
 		if self.denominator.is_one() {
-			return self.numerator.to_latex_string_complex();
+			return self.numerator.to_latex();
 		}
 		return format!(
 		               "\\frac{{{}}}{{{}}}",
-		               self.numerator.to_latex_string_complex(),
-		               self.denominator.to_latex_string_complex()
+		               self.numerator.to_latex(),
+		               self.denominator.to_latex()
 		);
 	}
 }
