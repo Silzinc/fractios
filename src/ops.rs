@@ -15,8 +15,7 @@ impl<T: PolyxNum> Add for &RatioFrac<T>
 		numerator *= &rhs.denominator;
 		denominator *= &rhs.denominator;
 		numerator += &rhs.numerator * &self.denominator;
-		Self::Output { numerator,
-		               denominator }
+		Self::Output { numerator, denominator }
 	}
 }
 
@@ -58,8 +57,7 @@ impl<T: PolyxNum> Sub for &RatioFrac<T>
 		numerator *= &rhs.denominator;
 		denominator *= &rhs.denominator;
 		numerator -= &rhs.numerator * &self.denominator;
-		Self::Output { numerator,
-		               denominator }
+		Self::Output { numerator, denominator }
 	}
 }
 
@@ -120,6 +118,7 @@ impl<T: PolyxNum> Inv for RatioFrac<T>
 
 impl<T: PolyxNum> RatioFrac<T>
 {
+	/// Inverts the fraction in place in O(1) time.
 	#[inline]
 	pub fn inv_inplace(&mut self) { std::mem::swap(&mut self.denominator, &mut self.numerator); }
 }

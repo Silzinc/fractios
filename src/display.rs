@@ -13,11 +13,7 @@ impl<T: Primitive> RatioFrac<T>
 		if self.denominator.is_one() {
 			return self.numerator.to_latex();
 		}
-		return format!(
-		               "\\frac{{{}}}{{{}}}",
-		               self.numerator.to_latex(),
-		               self.denominator.to_latex()
-		);
+		return format!("\\frac{{{}}}{{{}}}", self.numerator.to_latex(), self.denominator.to_latex());
 	}
 }
 
@@ -31,10 +27,6 @@ impl<T: Primitive> RatioFrac<Complex<T>>
 		if self.denominator.is_one() {
 			return self.numerator.to_latex();
 		}
-		return format!(
-		               "\\frac{{{}}}{{{}}}",
-		               self.numerator.to_latex(),
-		               self.denominator.to_latex()
-		);
+		return format!("\\frac{{{}}}{{{}}}", self.numerator.to_latex(), self.denominator.to_latex());
 	}
 }

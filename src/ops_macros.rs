@@ -40,40 +40,28 @@ macro_rules! impl_op_some_primitive_ratiofrac {
 			type Output = RatioFrac<T>;
 
 			#[inline]
-			fn $method(self, other: RatioFrac<T>) -> RatioFrac<T>
-			{
-				other.$method(RatioFrac::from(std::vec![self.into()]))
-			}
+			fn $method(self, other: RatioFrac<T>) -> RatioFrac<T> { other.$method(RatioFrac::from(std::vec![self.into()])) }
 		}
 		impl<T> $op<&RatioFrac<T>> for $t where T: PolyxNum + From<$t>
 		{
 			type Output = RatioFrac<T>;
 
 			#[inline]
-			fn $method(self, other: &RatioFrac<T>) -> RatioFrac<T>
-			{
-				other.$method(RatioFrac::from(std::vec![self.into()]))
-			}
+			fn $method(self, other: &RatioFrac<T>) -> RatioFrac<T> { other.$method(RatioFrac::from(std::vec![self.into()])) }
 		}
 		impl<T> $op<$t> for RatioFrac<T> where T: PolyxNum + From<$t>
 		{
 			type Output = RatioFrac<T>;
 
 			#[inline]
-			fn $method(self, other: $t) -> RatioFrac<T>
-			{
-				self.$method(RatioFrac::from(std::vec![other.into()]))
-			}
+			fn $method(self, other: $t) -> RatioFrac<T> { self.$method(RatioFrac::from(std::vec![other.into()])) }
 		}
 		impl<T> $op<$t> for &RatioFrac<T> where T: PolyxNum + From<$t>
 		{
 			type Output = RatioFrac<T>;
 
 			#[inline]
-			fn $method(self, other: $t) -> RatioFrac<T>
-			{
-				self.$method(RatioFrac::from(std::vec![other.into()]))
-			}
+			fn $method(self, other: $t) -> RatioFrac<T> { self.$method(RatioFrac::from(std::vec![other.into()])) }
 		}
 	};
 }
@@ -92,14 +80,12 @@ macro_rules! impl_op_all_primitive_ratiofrac {
 #[macro_export(local_inner_macros)]
 macro_rules! impl_assign_op_ratiofrac {
 	($op:ident, $assign_op:ident, $method:ident, $assign_method: ident $(,$requirements:ident)*) => {
-		impl<T> $assign_op<RatioFrac<T>> for RatioFrac<T>
-		where T: PolyxNum
+		impl<T> $assign_op<RatioFrac<T>> for RatioFrac<T> where T: PolyxNum
 		{
 			#[inline]
 			fn $assign_method(&mut self, other: RatioFrac<T>) { *self = std::mem::take(self).$method(&other) }
 		}
-		impl<T> $assign_op<&RatioFrac<T>> for RatioFrac<T>
-		where T: PolyxNum
+		impl<T> $assign_op<&RatioFrac<T>> for RatioFrac<T> where T: PolyxNum
 		{
 			#[inline]
 			fn $assign_method(&mut self, other: &RatioFrac<T>) { *self = std::mem::take(self).$method(other) }
