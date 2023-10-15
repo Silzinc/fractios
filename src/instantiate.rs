@@ -11,16 +11,17 @@ pub(crate) fn check<T: PolyxNum>(denominator: &Polynomial<T>)
 	}
 }
 
-#[macro_export]
-macro_rules! ratiofrac {
-  ($($x:expr),* ; $($y:expr),*) => ({
-    let denominator = Polynomial::from(vec![$($y),*]);
-    if denominator.is_empty() {
-      panic!("Cannot use zero as a denominator for RatioFrac")
-    };
-    RatioFrac::from((Polynomial::from(vec![$($x),*]), denominator))
-  })
-}
+// TODO: test and eventually correct this macro
+// #[macro_export]
+// macro_rules! ratiofrac {
+//   ($($x:expr),* ; $($y:expr),*) => ({
+//     let denominator = Polynomial::from(vec![$($y),*]);
+//     if denominator.is_empty() {
+//       panic!("Cannot use zero as a denominator for RatioFrac")
+//     };
+//     RatioFrac::from((Polynomial::from(vec![$($x),*]), denominator))
+//   })
+// }
 
 impl<T: PolyxNum> From<(Polynomial<T>, Polynomial<T>)> for RatioFrac<T>
 {
@@ -28,8 +29,7 @@ impl<T: PolyxNum> From<(Polynomial<T>, Polynomial<T>)> for RatioFrac<T>
 	fn from((numerator, denominator): (Polynomial<T>, Polynomial<T>)) -> Self
 	{
 		check(&denominator);
-		RatioFrac { numerator,
-		            denominator }
+		RatioFrac { numerator, denominator }
 	}
 }
 
@@ -92,8 +92,7 @@ impl<T: PolyxNum> RatioFrac<T>
 	pub fn new(numerator: Polynomial<T>, denominator: Polynomial<T>) -> Self
 	{
 		check(&denominator);
-		RatioFrac { numerator,
-		            denominator }
+		RatioFrac { numerator, denominator }
 	}
 
 	#[inline]
