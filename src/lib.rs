@@ -14,6 +14,6 @@ pub mod traits;
 #[derive(Clone, Debug)]
 pub struct RatioFrac<T>
 {
-	pub numerator:   Polynomial<T>,
-	pub denominator: Polynomial<T>,
+  pub numerator:   Polynomial<T>,
+  pub denominator: Polynomial<T>,
 }

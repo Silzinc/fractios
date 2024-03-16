@@ -1,7 +1,11 @@
-use num::{complex::ComplexFloat, Complex};
+use std::ops::Neg;
+
+use num::{
+  complex::ComplexFloat,
+  Complex,
+};
 use num_traits::Float;
 use polyx::traits::PolyxNum;
-use std::ops::Neg;
 
 /// A trait for signed types that can be used as the coefficients of a
 /// `RatioFrac`.
