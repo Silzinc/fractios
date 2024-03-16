@@ -2,31 +2,46 @@
 // Inspired by ratiofrac crate
 #[macro_export(local_inner_macros)]
 macro_rules! impl_op_ratiofrac {
-	($op:ident, $method:ident $(,$requirements:ident)*) => {
-		impl<T> $op<RatioFrac<T>> for &RatioFrac<T> where T: PolyxNum
-		{
-			type Output = RatioFrac<T>;
+  ($op:ident, $method:ident $(,$requirements:ident)*) => {
+    impl<T> $op<RatioFrac<T>> for &RatioFrac<T>
+    where
+      T: PolyxNum,
+    {
+      type Output = RatioFrac<T>;
 
-			#[inline]
-			fn $method(self, other: RatioFrac<T>) -> RatioFrac<T> { self.$method(&other) }
-		}
+      #[inline]
+      fn $method(self, other: RatioFrac<T>) -> RatioFrac<T>
+      {
+        self.$method(&other)
+      }
+    }
 
-		impl<T> $op<&RatioFrac<T>> for RatioFrac<T> where T: PolyxNum
-		{
-			type Output = RatioFrac<T>;
+    impl<T> $op<&RatioFrac<T>> for RatioFrac<T>
+    where
+      T: PolyxNum,
+    {
+      type Output = RatioFrac<T>;
 
-			#[inline]
-			fn $method(self, other: &RatioFrac<T>) -> RatioFrac<T> { (&self).$method(other) }
-		}
+      #[inline]
+      fn $method(self, other: &RatioFrac<T>) -> RatioFrac<T>
+      {
+        (&self).$method(other)
+      }
+    }
 
-		impl<T> $op<RatioFrac<T>> for RatioFrac<T> where T: PolyxNum
-		{
-			type Output = RatioFrac<T>;
+    impl<T> $op<RatioFrac<T>> for RatioFrac<T>
+    where
+      T: PolyxNum,
+    {
+      type Output = RatioFrac<T>;
 
-			#[inline]
-			fn $method(self, other: RatioFrac<T>) -> RatioFrac<T> { (&self).$method(&other) }
-		}
-	};
+      #[inline]
+      fn $method(self, other: RatioFrac<T>) -> RatioFrac<T>
+      {
+        (&self).$method(&other)
+      }
+    }
+  };
 }
 
 // The following macros allow to add ratiofracs with numbers
@@ -34,36 +49,56 @@ macro_rules! impl_op_ratiofrac {
 // code for each primitive type
 #[macro_export(local_inner_macros)]
 macro_rules! impl_op_some_primitive_ratiofrac {
-	($op:ident, $method:ident, $t:ty $(,$requirements:ident)*) => {
-		impl<T> $op<RatioFrac<T>> for $t where T: PolyxNum + From<$t>
-		{
-			type Output = RatioFrac<T>;
+  ($op:ident, $method:ident, $t:ty $(,$requirements:ident)*) => {
+    impl<T> $op<RatioFrac<T>> for $t
+    where
+      T: PolyxNum + From<$t>,
+    {
+      type Output = RatioFrac<T>;
 
-			#[inline]
-			fn $method(self, other: RatioFrac<T>) -> RatioFrac<T> { other.$method(RatioFrac::from(std::vec![self.into()])) }
-		}
-		impl<T> $op<&RatioFrac<T>> for $t where T: PolyxNum + From<$t>
-		{
-			type Output = RatioFrac<T>;
+      #[inline]
+      fn $method(self, other: RatioFrac<T>) -> RatioFrac<T>
+      {
+        other.$method(RatioFrac::from(std::vec![self.into()]))
+      }
+    }
+    impl<T> $op<&RatioFrac<T>> for $t
+    where
+      T: PolyxNum + From<$t>,
+    {
+      type Output = RatioFrac<T>;
 
-			#[inline]
-			fn $method(self, other: &RatioFrac<T>) -> RatioFrac<T> { other.$method(RatioFrac::from(std::vec![self.into()])) }
-		}
-		impl<T> $op<$t> for RatioFrac<T> where T: PolyxNum + From<$t>
-		{
-			type Output = RatioFrac<T>;
+      #[inline]
+      fn $method(self, other: &RatioFrac<T>) -> RatioFrac<T>
+      {
+        other.$method(RatioFrac::from(std::vec![self.into()]))
+      }
+    }
+    impl<T> $op<$t> for RatioFrac<T>
+    where
+      T: PolyxNum + From<$t>,
+    {
+      type Output = RatioFrac<T>;
 
-			#[inline]
-			fn $method(self, other: $t) -> RatioFrac<T> { self.$method(RatioFrac::from(std::vec![other.into()])) }
-		}
-		impl<T> $op<$t> for &RatioFrac<T> where T: PolyxNum + From<$t>
-		{
-			type Output = RatioFrac<T>;
+      #[inline]
+      fn $method(self, other: $t) -> RatioFrac<T>
+      {
+        self.$method(RatioFrac::from(std::vec![other.into()]))
+      }
+    }
+    impl<T> $op<$t> for &RatioFrac<T>
+    where
+      T: PolyxNum + From<$t>,
+    {
+      type Output = RatioFrac<T>;
 
-			#[inline]
-			fn $method(self, other: $t) -> RatioFrac<T> { self.$method(RatioFrac::from(std::vec![other.into()])) }
-		}
-	};
+      #[inline]
+      fn $method(self, other: $t) -> RatioFrac<T>
+      {
+        self.$method(RatioFrac::from(std::vec![other.into()]))
+      }
+    }
+  };
 }
 
 #[macro_export(local_inner_macros)]
