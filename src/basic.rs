@@ -13,6 +13,13 @@ impl<T: PolyxNum> RatioFrac<T>
   {
     self.numerator.eval(x.clone()) / self.denominator.eval(x.clone())
   }
+
+  /// Evaluates the inverse of the fraction at x.
+  #[inline]
+  pub fn eval_inv(&self, x: T) -> T
+  {
+    self.denominator.eval(x.clone()) / self.numerator.eval(x.clone())
+  }
 }
 
 impl<T: FloatLike> RatioFrac<T>
