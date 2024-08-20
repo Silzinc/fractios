@@ -12,8 +12,7 @@ pub mod traits;
 
 /// A rational fraction, i.e. a fraction of two polynomials.
 #[derive(Clone, Debug)]
-pub struct RatioFrac<T>
-{
-  pub numerator:   Polynomial<T>,
-  pub denominator: Polynomial<T>,
+pub struct RatioFrac<T> {
+	pub numerator: Polynomial<T>,
+	pub denominator: Polynomial<T>,
 }

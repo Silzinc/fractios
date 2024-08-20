@@ -1,9 +1,6 @@
 use std::ops::Neg;
 
-use num::{
-  complex::ComplexFloat,
-  Complex,
-};
+use num::{complex::ComplexFloat, Complex};
 use num_traits::Float;
 use polyx::traits::PolyxNum;
 
